@@ -1,0 +1,19 @@
+
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "opm-reborn",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-08",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "opm-reborn-db",
+      "database_id": "30efb681-281c-4149-b403-c14259782b14"
+    }
+  ]
+}
