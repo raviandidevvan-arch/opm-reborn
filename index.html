@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPM Reborn Admin</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #10121b;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  background: #191d2b;
+  padding: 22px;
+  border-bottom: 2px solid #e8a52b;
+}
+header h2 { margin: 0; color: #ffbd45; }
+main { padding: 20px; max-width: 650px; margin: auto; }
+.card {
+  background: #1c2130;
+  border: 1px solid #343b50;
+  border-radius: 12px;
+  padding: 17px;
+  margin-bottom: 16px;
+}
+h3 { color: #ffbd45; margin-top: 0; }
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 7px;
+  border: 1px solid #454c60;
+  background: #10121b;
+  color: white;
+}
+button {
+  width: 100%;
+  padding: 13px;
+  background: #e8a52b;
+  color: #171717;
+  font-weight: bold;
+  border: 0;
+  border-radius: 7px;
+  margin-top: 8px;
+}
+.stat { font-size: 24px; font-weight: bold; }
+small { color: #aeb5c7; }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>⚡ OPM REBORN</h2>
+  <small>ADMIN DASHBOARD • DEMO</small>
+</header>
+
+<main>
+  <div class="card">
+    <h3>Dashboard</h3>
+    <p>Status: 🟢 Prototype aktif</p>
+    <p>Total pemain: <span class="stat">0</span></p>
+  </div>
+
+  <div class="card">
+    <h3>💎 Diamond Reward</h3>
+    <input id="diamond" type="number" value="1000">
+    <button onclick="save('Diamond', 'diamond')">
+      Simpan Diamond
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>🪙 Gold Reward</h3>
+    <input id="gold" type="number" value="100000">
+    <button onclick="save('Gold', 'gold')">
+      Simpan Gold
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>🎟️ Summon Ticket</h3>
+    <input id="ticket" type="number" value="10">
+    <button onclick="save('Tiket Summon', 'ticket')">
+      Simpan Tiket
+    </button>
+  </div>
+
+  <div class="card">
+    <h3>📦 Informasi</h3>
+    <small id="status">
+      Ini adalah panel demo lokal. Belum terhubung
+      dengan server maupun akun pemain.
+    </small>
+  </div>
+</main>
+
+<script>
+function save(name, id) {
+  const value = document.getElementById(id).value;
+  if (value === "" || Number(value) < 0) {
+    alert("Masukkan angka yang valid!");
+    return;
+  }
+  document.getElementById("status").textContent =
+    name + " berhasil diatur menjadi " + value +
+    " (simulasi lokal).";
+}
+</script>
+
+</body>
+</html>
