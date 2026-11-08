@@ -1,113 +1,238 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPM Reborn Admin</title>
+<title>OPM Reborn</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: #10121b;
-  color: white;
-  font-family: Arial, sans-serif;
+*{box-sizing:border-box}
+body{margin:0;background:#101827;color:white;font-family:Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* HALAMAN PEMBUKA */
+#landing{
+ min-height:100vh;display:flex;flex-direction:column;
+ justify-content:space-between;padding:18px;
+ position:relative;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 50% 25%,#b3d7f5,#5686b2 40%,transparent 72%),
+ linear-gradient(145deg,#233e60,#111b2c);
 }
-header {
-  background: #191d2b;
-  padding: 22px;
-  border-bottom: 2px solid #e8a52b;
+#landing:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(transparent 40%,#080e19 100%);
 }
-header h2 { margin: 0; color: #ffbd45; }
-main { padding: 20px; max-width: 650px; margin: auto; }
-.card {
-  background: #1c2130;
-  border: 1px solid #343b50;
-  border-radius: 12px;
-  padding: 17px;
-  margin-bottom: 16px;
-}
-h3 { color: #ffbd45; margin-top: 0; }
-input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 7px;
-  border: 1px solid #454c60;
-  background: #10121b;
-  color: white;
-}
-button {
-  width: 100%;
-  padding: 13px;
-  background: #e8a52b;
-  color: #171717;
-  font-weight: bold;
-  border: 0;
-  border-radius: 7px;
-  margin-top: 8px;
-}
-.stat { font-size: 24px; font-weight: bold; }
-small { color: #aeb5c7; }
+.city{position:absolute;bottom:0;left:0;right:0;height:42%;display:flex;gap:5px;align-items:end}
+.building{flex:1;background:linear-gradient(90deg,#1c3045,#627b94,#1c3045);border:1px solid #8da6bd}
+.building:nth-child(1){height:70%}
+.building:nth-child(2){height:100%}
+.building:nth-child(3){height:75%}
+.building:nth-child(4){height:90%}
+.building:nth-child(5){height:65%}
+.building:nth-child(6){height:100%}
+.building:nth-child(7){height:80%}
+.building:nth-child(8){height:95%}
+.top,.center,.footer{position:relative;z-index:2}
+.top{display:flex;justify-content:flex-end;gap:8px}
+.small{background:#edbd32;border:2px solid #fff0a0;padding:10px;color:#241800;font-weight:bold}
+.center{text-align:center;margin:auto 0;padding:45px 0}
+.logo{font-size:clamp(38px,9vw,76px);font-weight:1000;font-style:italic;color:#ffda42;text-shadow:3px 4px #a22a15,6px 8px #111}
+.subtitle{letter-spacing:5px;font-weight:bold;text-shadow:0 2px 5px black}
+.server{display:inline-block;margin:35px auto 20px;padding:12px 25px;background:#101820d9;border:1px solid #ffffff55}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#45e67a;margin-right:8px}
+.enter{display:block;margin:auto;width:min(320px,90%);padding:17px;background:linear-gradient(#ffe66b,#e8a900);border:4px solid #fff1a0;color:#281b00;font-size:21px;font-weight:1000;box-shadow:0 5px #704800}
+.footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11px;text-shadow:0 2px 5px black}
+
+/* LOGIN DAN REGISTRASI */
+#auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at top,#385777,#101827 70%)}
+.panel{width:100%;max-width:410px;padding:28px;background:#1b2b42;border:1px solid #637d9d;border-radius:10px;box-shadow:0 15px 40px #0009}
+.panel h2{text-align:center;color:#ffda52}
+.panel input{width:100%;padding:14px;margin:8px 0;background:#101827;color:white;border:1px solid #526982;border-radius:5px}
+.action{width:100%;padding:14px;margin-top:12px;background:#edb72d;color:#211600;border:0;border-radius:5px;font-weight:bold}
+.switch{text-align:center;color:#c5d0dd;margin-top:18px;font-size:14px}
+.switch span{color:#ffda52;cursor:pointer}
+.message{text-align:center;color:#ffd66a;font-size:13px;min-height:20px}
+
+/* DASHBOARD */
+#dashboard{min-height:100vh;padding:20px;background:linear-gradient(145deg,#1d3856,#101827)}
+.dash-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:1px solid #60758e;padding-bottom:15px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0}
+.stat{background:#263d59;border:1px solid #526e90;padding:18px 5px;text-align:center;border-radius:7px}
+.stat strong{display:block;color:#ffda52;font-size:20px}
+.stat small{color:#cbd6e3}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.menu div{background:linear-gradient(135deg,#3c5879,#1d2d44);border:1px solid #627e9f;padding:25px 8px;text-align:center;font-weight:bold;border-radius:7px}
+.logout{padding:10px 15px;background:#a83232;color:white;border:0;border-radius:5px}
+@media(max-width:500px){.stats{grid-template-columns:1fr}.footer{font-size:10px}}
 </style>
 </head>
 <body>
 
-<header>
-  <h2>⚡ OPM REBORN</h2>
-  <small>ADMIN DASHBOARD • DEMO</small>
-</header>
+<section id="landing">
+ <div class="city">
+  <div class="building"></div><div class="building"></div>
+  <div class="building"></div><div class="building"></div>
+  <div class="building"></div><div class="building"></div>
+  <div class="building"></div><div class="building"></div>
+ </div>
+ <div class="top">
+  <button class="small" onclick="alert('Selamat datang di OPM Reborn!')">📢 PENGUMUMAN</button>
+  <button class="small" onclick="alert('Data akun disimpan di database OPM Reborn.')">🔒 PRIVASI</button>
+ </div>
+ <div class="center">
+  <div class="logo">OPM REBORN</div>
+  <div class="subtitle">THE HERO EXPERIENCE</div>
+  <div class="server"><span class="dot"></span>Server 970 - Boros</div>
+  <button class="enter" onclick="openAuth()">MASUK GAME</button>
+ </div>
+ <div class="footer">
+  <span>© OPM REBORN - PROYEK FAN-MADE</span>
+  <span>Versi 1.0.0 BETA</span>
+ </div>
+</section>
 
-<main>
-  <div class="card">
-    <h3>Dashboard</h3>
-    <p>Status: 🟢 Prototype aktif</p>
-    <p>Total pemain: <span class="stat">0</span></p>
+<section id="auth" class="hidden">
+ <div class="panel">
+  <h2 id="authTitle">LOGIN PEMAIN</h2>
+  <input id="username" placeholder="Nama pengguna" maxlength="20" autocomplete="username">
+  <input id="password" type="password" placeholder="Kata sandi" maxlength="128" autocomplete="current-password">
+  <div class="message" id="message"></div>
+  <button class="action" onclick="submitAuth()">MASUK</button>
+  <div class="switch" id="switchText">
+   Belum punya akun? <span onclick="toggleAuth()">Daftar di sini</span>
   </div>
+  <div class="switch"><span onclick="backHome()">Kembali ke halaman awal</span></div>
+ </div>
+</section>
 
-  <div class="card">
-    <h3>💎 Diamond Reward</h3>
-    <input id="diamond" type="number" value="1000">
-    <button onclick="save('Diamond', 'diamond')">
-      Simpan Diamond
-    </button>
+<section id="dashboard" class="hidden">
+ <div class="dash-head">
+  <div>
+   <h2>OPM REBORN</h2>
+   <span>Selamat datang, <b id="playerName"></b></span>
   </div>
-
-  <div class="card">
-    <h3>🪙 Gold Reward</h3>
-    <input id="gold" type="number" value="100000">
-    <button onclick="save('Gold', 'gold')">
-      Simpan Gold
-    </button>
-  </div>
-
-  <div class="card">
-    <h3>🎟️ Summon Ticket</h3>
-    <input id="ticket" type="number" value="10">
-    <button onclick="save('Tiket Summon', 'ticket')">
-      Simpan Tiket
-    </button>
-  </div>
-
-  <div class="card">
-    <h3>📦 Informasi</h3>
-    <small id="status">
-      Ini adalah panel demo lokal. Belum terhubung
-      dengan server maupun akun pemain.
-    </small>
-  </div>
-</main>
+  <button class="logout" onclick="logout()">KELUAR</button>
+ </div>
+ <h3>INFORMASI PEMAIN</h3>
+ <div class="stats">
+  <div class="stat"><strong id="diamond">0</strong><small>💎 Berlian</small></div>
+  <div class="stat"><strong id="gold">0</strong><small>🪙 Emas</small></div>
+  <div class="stat"><strong id="ticket">0</strong><small>🎟️ Tiket Summon</small></div>
+ </div>
+ <h3>MENU PERMAINAN</h3>
+ <div class="menu">
+  <div>👊<br>Karakter</div>
+  <div>⚔️<br>Pertarungan</div>
+  <div>🎟️<br>Summon</div>
+  <div>🛡️<br>Formasi Tim</div>
+  <div>🎒<br>Inventaris</div>
+  <div>📜<br>Misi</div>
+ </div>
+ <p style="color:#aebdd0;text-align:center;font-size:12px;margin-top:30px">OPM Reborn - Private Beta</p>
+</section>
 
 <script>
-function save(name, id) {
-  const value = document.getElementById(id).value;
-  if (value === "" || Number(value) < 0) {
-    alert("Masukkan angka yang valid!");
-    return;
-  }
-  document.getElementById("status").textContent =
-    name + " berhasil diatur menjadi " + value +
-    " (simulasi lokal).";
+let isRegister=false;
+
+const landing=document.getElementById("landing");
+const auth=document.getElementById("auth");
+const dashboard=document.getElementById("dashboard");
+const message=document.getElementById("message");
+
+function show(page){
+ landing.classList.toggle("hidden",page!=="landing");
+ auth.classList.toggle("hidden",page!=="auth");
+ dashboard.classList.toggle("hidden",page!=="dashboard");
 }
+
+function openAuth(){
+ isRegister=false;
+ updateAuth();
+ show("auth");
+}
+
+function backHome(){show("landing")}
+
+function toggleAuth(){
+ isRegister=!isRegister;
+ updateAuth();
+}
+
+function updateAuth(){
+ document.getElementById("authTitle").textContent=isRegister?"REGISTRASI PEMAIN":"LOGIN PEMAIN";
+ document.querySelector(".action").textContent=isRegister?"BUAT AKUN":"MASUK";
+ document.getElementById("switchText").innerHTML=isRegister
+ ?'Sudah punya akun? <span onclick="toggleAuth()">Login di sini</span>'
+ :'Belum punya akun? <span onclick="toggleAuth()">Daftar di sini</span>';
+ message.textContent="";
+ document.getElementById("password").value="";
+}
+
+async function api(path,options={}){
+ const response=await fetch(path,{
+  ...options,
+  credentials:"same-origin",
+  headers:{"Content-Type":"application/json",...(options.headers||{})}
+ });
+ const data=await response.json();
+ if(!response.ok)throw new Error(data.message||"Permintaan gagal");
+ return data;
+}
+
+async function submitAuth(){
+ const username=document.getElementById("username").value.trim();
+ const password=document.getElementById("password").value;
+ if(!username||!password){
+  message.textContent="Isi nama pengguna dan kata sandi.";
+  return;
+ }
+ message.textContent="Memproses...";
+ try{
+  if(isRegister){
+   await api("/api/register",{
+    method:"POST",
+    body:JSON.stringify({username,password})
+   });
+  }else{
+   await api("/api/login",{
+    method:"POST",
+    body:JSON.stringify({username,password})
+   });
+  }
+  await loadPlayer();
+ }catch(error){
+  message.textContent=error.message;
+ }
+}
+
+async function loadPlayer(){
+ try{
+  const data=await api("/api/me");
+  const user=data.user;
+  document.getElementById("playerName").textContent=user.username;
+  document.getElementById("diamond").textContent=user.diamond;
+  document.getElementById("gold").textContent=user.gold;
+  document.getElementById("ticket").textContent=user.summon_ticket;
+  show("dashboard");
+ }catch(error){
+  show("auth");
+  message.textContent=error.message;
+ }
+}
+
+async function logout(){
+ try{
+  await api("/api/logout",{method:"POST"});
+  show("landing");
+ }catch(error){
+  alert(error.message);
+ }
+}
+
+show("landing");
 </script>
 </body>
 </html>
